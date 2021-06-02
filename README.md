@@ -30,5 +30,7 @@ python3 lottery.py https://www.douban.com/group/topic/228012134/ 10
   ```
   brew install geckodriver
   ```
+  windows下可以先下载对应的可执行文件，再把路径添加系统的PATH参数，参考：
+  http://www.learningaboutelectronics.com/Articles/How-to-install-geckodriver-Python-windows.php
 
 

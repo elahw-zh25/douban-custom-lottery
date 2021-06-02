@@ -16,6 +16,7 @@ python3 lottery.py https://www.douban.com/group/topic/228012134/ 10
 运行结果如下
 ![](https://github.com/elahw-zh25/douban-custom-lottery/blob/main/Example.png)
 
+注： 因为使用的是浏览器模拟人工访问，所以网页信息抓取会比较慢一点。但这样比较尊重豆瓣网络访问规则，而且被判定为机器人的概率比较低。
 
 # Prerequisite
 - python3

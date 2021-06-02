@@ -9,7 +9,7 @@
 ```
 python3 lottery.py TARGET_LINK NUMER_OF_LOTTERY
 ```
-在这个小组贴：https://www.douban.com/group/topic/228012134/ 里随机抽10个人的代码：
+在这个小组贴：https://www.douban.com/group/topic/228012134/ 里随机抽10个人的指令：
 ```
 python3 lottery.py https://www.douban.com/group/topic/228012134/ 10
 ```

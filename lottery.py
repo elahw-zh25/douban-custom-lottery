@@ -14,8 +14,8 @@
     limitations under the License.
 '''
 
-from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
+import requests
+from bs4 import BeautifulSoup
 import sys
 import random
 import time
@@ -41,37 +41,33 @@ def read_char():
     
 candidates = {}
 
-options = Options()
-options.add_argument('-headless')
-f = webdriver.Firefox(options=options)
-
 next = sys.argv[1]
+headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36'}
 while next:
     print("正在分析 "+next, end='\r')
     try:
-        f.get(next)
+        f = requests.get(next, headers = headers)
     except:
         break
 
-    reply_content = f.find_element_by_id("comments")
-    comments = reply_content.find_elements_by_class_name("reply-doc")
+    res = BeautifulSoup(f.content, 'html.parser')
+    reply_content = res.findAll("ul", {"id":"comments"})
+    comments = reply_content[0].findAll("div", {"class":"reply-doc"})
     for c in comments:
-        user_link = c.find_element_by_tag_name("h4").find_element_by_tag_name("a")
-        username = user_link.get_attribute("text")
-        userpage = user_link.get_attribute("href")
-        comment = c.find_element_by_class_name("reply-content").get_attribute("innerHTML")
+        username = c.h4.a.text
+        userpage = c.h4.a['href']
+        comment = c.p.text
         if userpage not in candidates.keys():
             candidates[userpage] = UserInfo(userpage, username)
         candidates[userpage].add_comment(comment)
-    
-    try:
-        next_page = f.find_element_by_xpath("//span[@class='next']/a")
-    except:
-        break
-    if next_page:
-        next = next_page.get_attribute("href")
+
+    next_page = res.findAll("span", {"class":"next"})
+
+    if len(next_page) > 0 and next_page[0].a:
+        next = next_page[0].a['href']
         time.sleep(1)
-f.close()
+    else:
+        break
 
 print("")
 target = int(sys.argv[2])
@@ -91,4 +87,3 @@ while target > 0:
     if c == 'Y' or c == 'y':
         target = target - 1
         del candidates[key]
-    

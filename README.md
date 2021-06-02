@@ -19,18 +19,11 @@ python3 lottery.py https://www.douban.com/group/topic/228012134/ 10
 注： 因为使用的是浏览器模拟人工访问，所以网页信息抓取会比较慢。但这样比较尊重豆瓣网络访问规则，而且被判定为机器人的概率比较低。
 
 # Prerequisite
-- python3
-- selenium
+- python
+- BeautifulSoup, requests
   可以使用pip进行安装。 
   ```
-  pip3 install selenium
+  pip install bs4 requests
   ```
-- geckodriver
-  mac os 可以直接使用 homebrew 安装 
-  ```
-  brew install geckodriver
-  ```
-  windows下可以先下载对应的可执行文件，再把路径添加系统的PATH参数，参考：
-  http://www.learningaboutelectronics.com/Articles/How-to-install-geckodriver-Python-windows.php
 
 
